@@ -1,0 +1,43 @@
+propel:
+    driver:
+        id: ~
+        name: { type:varchar(100), required:true }
+        lastname: { type:varchar(100), required:true }
+        phone: { type: varchar(10), required:true }
+        created_at: ~
+    vehicle_type:
+        id: ~
+        name: { type:varchar(100), required:true }
+    mark:
+        id: ~
+        name: { type:varchar(100), required:true }
+    vehicle:
+        id: ~
+        image: { type: varchar(500) }
+        mark_id: { type: integer, required:true, foreignTable: mark, foreignReference: id }
+        vechicle_type_id: { type: integer, required:true, foreignTable: vehicle_type, foreignReference: id }
+        model: { type: varchar(50), required: true }
+        plate: { type:varchar(10), required:true }
+        capacity: { type:integer, required:true }
+    driver_vehicle:
+        id: ~
+        driver_id: { type: integer, required:true, foreignTable: driver, foreignReference: id }
+        vehicle_id: { type: integer, required:true, foreignTable: vehicle, foreignReference: id }
+        is_active: { type: boolean, required: true, default:1 }
+    place:
+        id: ~
+        name: { type:varchar(40), required: true }
+        address: { type: varchar(100), required: true }
+        image: { type: varchar(100), required: true }
+    route:
+        id: ~
+        origin: { type: integer, required: true, foreignTable: place, foreignReference: id }
+        destination: { type: integer, required: true, foreignTable: place, foreignReference: id }
+    trip:
+       id: ~
+       route_id: { type: integer, required:true, foreignTable: route, foreignReference: id }
+       driver_vehicle_id: { type: integer, required:true, foreignTable: driver_vehicle, foreignReference: id }
+       price: { type: float, required:true }
+       trip_time: { type: integer, required: true }
+       trip_start: { type: timestamp, required: true }
+       created_at: ~
